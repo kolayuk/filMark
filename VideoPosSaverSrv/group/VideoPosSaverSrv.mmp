@@ -1,0 +1,41 @@
+/*
+============================================================================
+ Name		: VideoPosSaverSrv.mmp
+ Author	  : Usanov-Kornilov Nikolay (aka Kolay)
+ Copyright   : 
+Contacts:
+	kolayuk@mail.ru
+	http://kolaysoft.ru
+
+(c) KolaySoft, 2011
+
+ Description : This is the project specification file for VideoPosSaverSrv.
+============================================================================
+*/
+
+TARGET		  filMarkSrv.exe
+TARGETTYPE	  exe
+UID			 0 0x20044243
+EPOCSTACKSIZE	 0xf000
+EPOCHEAPSIZE 0x1000 0x600000
+
+
+USERINCLUDE	 ..\inc
+SYSTEMINCLUDE   \epoc32\include APP_LAYER_SYSTEMINCLUDE
+
+SOURCEPATH ..\data
+START RESOURCE 20044242.rss
+END
+
+SOURCEPATH	  ..\src
+SOURCE		  VideoPosSaverSrv.cpp Application.cpp aiplayerpluginengine.cpp FgrObserver.cpp
+
+LIBRARY		 euser.lib bafl.lib ws32.lib apgrfx.lib
+LIBRARY			mpxcollectionutility.lib mpxcommon.lib mpxplaybackutility.lib efsrv.lib flogger.lib
+
+#ifdef ENABLE_ABIV2_MODE
+DEBUGGABLE_UDEBONLY
+#endif
+CAPABILITY ReadDeviceData WriteDeviceData LocalServices ReadUserData SwEvent PowerMgmt
+
+OPTION GCCE -fno-strict-aliasing
